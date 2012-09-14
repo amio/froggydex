@@ -31,6 +31,16 @@
         }
         return attrs;
     };
+
+    Object.prototype.toArray = function(){
+        var attrs = [];
+        for(var attr in this){
+            if(this.hasOwnProperty(attr)){
+                attrs.push(this[attr]);
+            }
+        }
+        return attrs;
+    };
 })();
 
 function zha() {
@@ -86,9 +96,10 @@ $(function(){
 
     window.setFrog = function(){
         var name = nameInput.value;
-        var base = name.split(' ')[0],
-            type = name.split(' ')[1],
-            patt = name.split(' ')[2];
+        var nameArr = name.split(' ');
+        var base = nameArr[0],
+            type = nameArr[1],
+            patt = nameArr[2];
         if(pattern[patt] && baseColor[base]){
             var oldBase = frog.querySelector('.base');
             var newBase = Blender.colorOverlay($('#frogbase')[0],baseColor[base]);
@@ -100,6 +111,27 @@ $(function(){
     };
 
     document.getElementById('name').addEventListener('input',setFrog);
+
+    // init select
+    var $Sels = $('#name-row').find('select');
+    var selBaseColor = $Sels[0],
+        selPatternColor = $Sels[1],
+        selPattern = $Sels[2];
+
+    function fillSelect(sel,opts){
+        var tmpl = "<option value={$name}>{$name}</option>";
+        sel.innerHTML = tmpl.applyData(opts.toArray());
+    }
+    fillSelect(selBaseColor,baseColor);
+    fillSelect(selPatternColor,patternColor);
+    fillSelect(selPattern,pattern);
+
+    $Sels.on('change',function(){
+        var name = [$Sels[0].value,$Sels[1].value,$Sels[2].value].join(' ');
+        $('#name').val(name);
+        setFrog();
+        console.log(this.value);
+    });
 
     // blink
     setTimeout(function(){
