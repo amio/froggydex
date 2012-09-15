@@ -122,10 +122,17 @@ $(function(){
         }
 
         frog.className = 'frog ' + name;
-        setUrlBySel();
+        setUrlByName(name);
     };
 
-    document.getElementById('name').addEventListener('input',setFrog);
+    document.getElementById('name').addEventListener('input',function(){
+        var name = this.value;
+        if(isNameIllegal(name)){
+            setSelByName(name);
+            setUrlByName(name);
+            setFrog();
+        }
+    });
 
     // init select
     var $Sels = $('#name-row').find('select');
@@ -156,8 +163,11 @@ $(function(){
         $Sels[1].value = names[1];
         $Sels[2].value = names[2];
     };
-    var setUrlBySel = function(){
-        window.location.hash = [$Sels[0].value, $Sels[1].value, $Sels[2].value].join('-');
+    var setUrlByName = function(name){
+        window.location.hash = name.replace(/ /g,'-');
+    };
+    var setInputByName = function(name){
+        nameInput.value = name;
     };
 
     // set sel and name by url
