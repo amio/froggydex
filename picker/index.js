@@ -134,7 +134,11 @@ $(function(){
         selPattern = $Sels[2];
 
     function fillSelect(sel,opts,tmpl){
-        sel.innerHTML = tmpl.applyData(opts.toArray());
+        sel.innerHTML = tmpl.applyData(opts.toArray().sort(function(a,b){
+            a = a.level && parseInt(a.level) || a.name;
+            b = b.level && parseInt(b.level) || b.name;
+            return a == b ? 0 : (a > b ? 1 : -1);
+        }));
     }
     fillSelect(selBaseColor,baseColor,'<option value={$name}>{$name}</option>');
     fillSelect(selPatternColor,patternColor,'<option value={$name}>{$name}</option>');
