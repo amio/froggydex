@@ -104,10 +104,18 @@ $(function(){
         if(baseColor[baseC]){
             var oldBase = frog.querySelector('.base'),
                 baseImageUrl = '../resources/frogs/frog_base_256.png';
-            Blender.colorOverlay(baseImageUrl, baseColor[baseC],function(newBase){
+            if(baseC == 'Glass'){
+                // only for 'Glass'
+                var newBase = new Image;
                 newBase.className = 'base';
+                newBase.src = '../resources/frogs/frog_base_256_glass.png';
                 frog.replaceChild(newBase, oldBase);
-            });
+            }else{
+                Blender.colorOverlay(baseImageUrl, baseColor[baseC],function(newBase){
+                    newBase.className = 'base';
+                    frog.replaceChild(newBase, oldBase);
+                });
+            }
         }
 
         if (patternColor[pattC] && pattern[patt]) {
