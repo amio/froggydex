@@ -115,6 +115,9 @@ var Blender = (function ($) {
          * Black + Color = Black
          */
         colorOverlay:function (pixelData,i,color) {
+            // return when this is a transparent pixel
+            if( pixelData[i+3] == 0 ) return;
+
             var grayscale = pixelData[i] / 255;
             pixelData[i] = parseInt(color.R * grayscale);
             pixelData[i+1] = parseInt(color.G * grayscale);
