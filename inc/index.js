@@ -94,20 +94,34 @@ $(function(){
     var nameInput = document.getElementById('name');
     var frog = document.getElementById('frog');
 
-    window.setFrog = function(){
+    window.setFrog = function () {
         var name = nameInput.value;
         var nameArr = name.split(' ');
-        var base = nameArr[0],
-            type = nameArr[1],
+        var baseC = nameArr[0],
+            pattC = nameArr[1],
             patt = nameArr[2];
-        if(pattern[patt] && baseColor[base]){
-            var oldBase = frog.querySelector('.base');
-            var newBase = Blender.colorOverlay($('#frogbase')[0],baseColor[base]);
-            newBase.className = 'base';
-            frog.replaceChild(newBase,oldBase);
 
-            frog.className = 'frog ' + name;
+        if(baseColor[baseC]){
+            var oldBase = frog.querySelector('.base'),
+                baseImageUrl = './resources/frogs/frog_base_256.png';
+            Blender.colorOverlay(baseImageUrl, baseColor[baseC],function(newBase){
+                newBase.className = 'base';
+                frog.replaceChild(newBase, oldBase);
+            });
         }
+
+        if (patternColor[pattC]) {
+            var oldPattern = frog.querySelector('.pattern');
+            var newPatternImageUrl = './resources/frogs/frog_{$id}_256.png'.applyData({
+                id: pattern[patt].patternID
+            });
+            Blender.colorOverlay(newPatternImageUrl, patternColor[pattC],function(newPattern){
+                newPattern.className = 'pattern';
+                frog.replaceChild(newPattern, oldPattern);
+            });
+        }
+
+        frog.className = 'frog ' + name;
     };
 
     document.getElementById('name').addEventListener('input',setFrog);
@@ -118,13 +132,12 @@ $(function(){
         selPatternColor = $Sels[1],
         selPattern = $Sels[2];
 
-    function fillSelect(sel,opts){
-        var tmpl = "<option value={$name}>{$name}</option>";
+    function fillSelect(sel,opts,tmpl){
         sel.innerHTML = tmpl.applyData(opts.toArray());
     }
-    fillSelect(selBaseColor,baseColor);
-    fillSelect(selPatternColor,patternColor);
-    fillSelect(selPattern,pattern);
+    fillSelect(selBaseColor,baseColor,'<option value={$name}>{$name}</option>');
+    fillSelect(selPatternColor,patternColor,'<option value={$name}>{$name}</option>');
+    fillSelect(selPattern,pattern,'<option value={$name}>{$level}. {$name}</option>');
 
     $Sels.on('change',function(){
         var name = [$Sels[0].value,$Sels[1].value,$Sels[2].value].join(' ');

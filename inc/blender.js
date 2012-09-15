@@ -154,8 +154,13 @@ var Blender = (function ($) {
     };
 
     return {
-        colorOverlay:function (image, color) {
-            return blendFactory(methods.colorOverlay, image, color);
+        colorOverlay:function (imageUrl, color,callback) {
+            var image = new Image();
+            image.onload = function(){
+                var resultCanvas = blendFactory(methods.colorOverlay, image, color);
+                callback(resultCanvas);
+            };
+            image.src = imageUrl;
         }
     }
 })(jQuery);
