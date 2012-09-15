@@ -110,7 +110,7 @@ $(function(){
             });
         }
 
-        if (patternColor[pattC]) {
+        if (patternColor[pattC] && pattern[patt]) {
             var oldPattern = frog.querySelector('.pattern');
             var newPatternImageUrl = './resources/frogs/frog_{$id}_256.png'.applyData({
                 id: pattern[patt].patternID
@@ -122,6 +122,7 @@ $(function(){
         }
 
         frog.className = 'frog ' + name;
+        setUrlBySel();
     };
 
     document.getElementById('name').addEventListener('input',setFrog);
@@ -146,6 +147,27 @@ $(function(){
         console.log(this.value);
     });
 
+    var setSelByName = function(name){
+        var names = name.split(' ');
+        $Sels[0].value = names[0];
+        $Sels[1].value = names[1];
+        $Sels[2].value = names[2];
+    };
+    var setUrlBySel = function(){
+        window.location.hash = [$Sels[0].value, $Sels[1].value, $Sels[2].value].join('-');
+    };
+
+    // set sel and name by url
+    var frogname = window.location.hash.substring(1).replace(/-/g,' ');
+    var isNameIllegal = function(name){
+        var parts = name.split(' ');
+        return !!(baseColor[parts[0]] && patternColor[parts[1]] && pattern[parts[2]]);
+    };
+    if(isNameIllegal(frogname)){
+        setSelByName(frogname);
+        nameInput.value = frogname;
+    }
+
     // init frog
     setFrog();
 
@@ -154,4 +176,5 @@ $(function(){
         zha();
         setTimeout( arguments.callee, 3000 + Math.round( Math.random()*9000 ) );
     }, 6000 + Math.round( Math.random()*6000 ) );
+
 });
