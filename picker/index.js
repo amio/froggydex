@@ -103,7 +103,7 @@ $(function(){
 
         if(baseColor[baseC]){
             var oldBase = frog.querySelector('.base'),
-                baseImageUrl = './resources/frogs/frog_base_256.png';
+                baseImageUrl = '../resources/frogs/frog_base_256.png';
             Blender.colorOverlay(baseImageUrl, baseColor[baseC],function(newBase){
                 newBase.className = 'base';
                 frog.replaceChild(newBase, oldBase);
@@ -112,7 +112,7 @@ $(function(){
 
         if (patternColor[pattC] && pattern[patt]) {
             var oldPattern = frog.querySelector('.pattern');
-            var newPatternImageUrl = './resources/frogs/frog_{$id}_256.png'.applyData({
+            var newPatternImageUrl = '../resources/frogs/frog_{$id}_256.png'.applyData({
                 id: pattern[patt].patternID
             });
             Blender.colorOverlay(newPatternImageUrl, patternColor[pattC],function(newPattern){
