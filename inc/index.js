@@ -146,12 +146,12 @@ $(function(){
         console.log(this.value);
     });
 
+    // init frog
+    setFrog();
+
     // blink
     setTimeout(function(){
         zha();
         setTimeout( arguments.callee, 3000 + Math.round( Math.random()*9000 ) );
     }, 6000 + Math.round( Math.random()*6000 ) );
-
-    // init frog
-    setTimeout(setFrog,10);
 });
