@@ -144,7 +144,6 @@ $(function(){
         var name = [$Sels[0].value,$Sels[1].value,$Sels[2].value].join(' ');
         $('#name').val(name);
         setFrog();
-        console.log(this.value);
     });
 
     var setSelByName = function(name){
