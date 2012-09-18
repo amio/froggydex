@@ -55,8 +55,7 @@ function zha() {
 
 var Frog = (function(){
 
-	var frogTmpl = '<div id="frog" class="frog {$type}">' +
-						'<div class="base"></div><div class="pattern"></div><div class="overlay"></div></div>';
+	var frogTmpl = '<div id="frog" class="frog {$type}"><div class="base"></div><div class="pattern"></div><div class="overlay"></div></div>';
 
 	var _Frog = function(cfg){
 		this.cfg = $.extend({
@@ -187,6 +186,8 @@ $(function(){
     if(isNameIllegal(frogname)){
         setSelByName(frogname);
         nameInput.value = frogname;
+    }else{
+        setSelByName(nameInput.value);
     }
 
     // init frog
