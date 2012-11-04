@@ -92,6 +92,9 @@ $(function(){
 
     var nameInput = document.getElementById('name');
     var frog = document.getElementById('frog');
+    var baseColor = global.baseColor,
+        patternColor = global.patternColor,
+        pattern = global.pattern;
 
     window.setFrog = function () {
         var name = nameInput.value;
