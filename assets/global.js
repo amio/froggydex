@@ -148,7 +148,9 @@
             Foramen:{patternID:"97", name:"Foramen", level:"31"},
             Emblema:{patternID:"98", name:"Emblema", level:"32"},
             Fortuno:{patternID:"99", name:"Fortuno", level:"32"}
-        }
+        },
+
+        $cosmos: $('#cosmos')
     };
 
     // Support AMD

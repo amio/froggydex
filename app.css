@@ -1,0 +1,18 @@
+/* =================================
+            Global Style
+================================= */
+
+a { text-decoration: none; color: #0044CC }
+
+html, body, #cosmos { margin: 0; padding: 0; width: 100%; height: 100%  }
+#cosmos { position: relative; font: 12px/1.6em "Open Sans", sans-serif }
+
+/* =================================
+            Module Style
+================================= */
+
+/* NAV.HTML */
+#nav { z-index: 999; position: absolute; top: 100px; left: 50%; width: 200px; margin-left: -100px; text-align: center }
+#nav .buttons { height: 30px; }
+#nav .button { display: inline-block; font-size: 15px; line-height: 30px; height: 30px; padding: 0 10px }
+#nav .button:hover { color: #FFF; background-color: #0055cc; border-radius: 5px }
